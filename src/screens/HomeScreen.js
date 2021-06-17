@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Card, Button, ListGroup } from 'react-bootstrap'
+import { Row, Col, Card, Button, ListGroup, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
 import SearchBox from '../components/SearchBox'
@@ -26,7 +26,7 @@ function HomeScreen({ history }) {
                   
                     <ListGroup variant="flush">
                       <ListGroup.Item>
-                        <Link to='notes/primary/notes-list'><Button variant="outline-secondary">Primary school</Button>{' '}</Link>
+                        <Link to='notes/primary/notes-list'><Button variant="outline-secondary">Primary </Button>{' '}</Link>
                         </ListGroup.Item>
                       <ListGroup.Item><Link to="/notes/sec/notes-list"><Button variant="outline-secondary">O-Level</Button>{' '}</Link></ListGroup.Item>
                       <ListGroup.Item><Link to="/notes/sec/notes-list"><Button variant="outline-secondary">A-Level</Button>{' '}</Link></ListGroup.Item>
@@ -41,10 +41,12 @@ function HomeScreen({ history }) {
                   <Link to="/notes-list">Questions</Link>
                   </Card.Title>
                   
-                    <ListGroup variant="flush">
-                      <ListGroup.Item>Primary School</ListGroup.Item>
-                      <ListGroup.Item>O-Level</ListGroup.Item>
-                      <ListGroup.Item>A-Level</ListGroup.Item>
+                  <ListGroup variant="flush">
+                      <ListGroup.Item>
+                        <Link to='notes/primary/notes-list'><Button variant="outline-secondary">Primary</Button>{' '}</Link>
+                        </ListGroup.Item>
+                      <ListGroup.Item><Link to="/notes/sec/notes-list"><Button variant="outline-secondary">O-Level</Button>{' '}</Link></ListGroup.Item>
+                      <ListGroup.Item><Link to="/notes/sec/notes-list"><Button variant="outline-secondary">A-Level</Button>{' '}</Link></ListGroup.Item>
                     </ListGroup>
                   </Card.Body>
               </Card>
@@ -56,12 +58,13 @@ function HomeScreen({ history }) {
                 <Link to="/notes-list">Exams</Link>
                 </Card.Title>
                 
-                  <ListGroup variant="flush">
-                    <ListGroup.Item>Primary School</ListGroup.Item>
-                    <ListGroup.Item>O-Level</ListGroup.Item>
-                    <ListGroup.Item>A-Level</ListGroup.Item>
-                  </ListGroup>
-
+                <ListGroup variant="flush">
+                      <ListGroup.Item>
+                        <Link to='notes/primary/notes-list'><Button variant="outline-secondary">Primary</Button>{' '}</Link>
+                        </ListGroup.Item>
+                      <ListGroup.Item><Link to="/notes/sec/notes-list"><Button variant="outline-secondary">O-Level</Button>{' '}</Link></ListGroup.Item>
+                      <ListGroup.Item><Link to="/notes/sec/notes-list"><Button variant="outline-secondary">A-Level</Button>{' '}</Link></ListGroup.Item>
+                    </ListGroup>
                 </Card.Body>
               </Card>
             </Col>
