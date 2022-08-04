@@ -1,0 +1,21 @@
+{
+  "name": "techlearn",
+  "version": "1.0.0",
+  "description": "This an open source school learning system built with React nad Redux for easier learning of Tanzania schools and those who uses the same syllabus. It also provides all kind of learning materials and skills required for premaration of all examinations. It also provide users with different permissions to access various apps depending on their access level.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development --watch ./techlearn/frontend/src/index.js --output ./leadmanager/frontend/static/frontend/main.js",
+    "build": "webpack --mode production ./techlearn/frontend/src/index.js --output ./leadmanager/frontend/static/frontend/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwinamijr/techlearn.git"
+  },
+  "author": "mwinamijr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mwinamijr/techlearn/issues"
+  },
+  "homepage": "https://github.com/mwinamijr/techlearn#readme"
+}
