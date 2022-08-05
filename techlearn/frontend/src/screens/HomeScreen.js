@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import SearchBox from '../components/SearchBox'
 
 
-function HomeScreen({ history }) {
+function HomeScreen() {
   
     return (
         <div>

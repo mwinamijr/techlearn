@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap'
-import { HashRouter as Router, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import NotesListScreen from './components/NotesList'
@@ -15,16 +15,16 @@ function App() {
     <Router>
         <Header />
       <main className="py-3">
-        <Container>
-          <Route path='/' component={HomeScreen} exact />
-          <Route path='/login' component={LoginScreen} />
-          <Route path='/register' component={RegisterScreen} />
-          <Route path='/about' component={AboutScreen} />
-          <Route path='/notes/notes-list' component={NotesListScreen} />
-          <Route path='/notes/sec/notes-list' component={SecNotesList} />
-          <Route path='/notes/primary/notes-list' component={PrNotesList} />
+        <Routes>
+          <Route path='/' element={HomeScreen} exact />
+          <Route path='/login' element={LoginScreen} />
+          <Route path='/register' element={RegisterScreen} />
+          <Route path='/about' element={AboutScreen} />
+          <Route path='/notes/notes-list' element={NotesListScreen} />
+          <Route path='/notes/sec/notes-list' element={SecNotesList} />
+          <Route path='/notes/primary/notes-list' element={PrNotesList} />
           
-        </Container>
+        </Routes>
       </main>
       <Footer />
     </Router>
