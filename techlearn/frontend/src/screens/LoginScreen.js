@@ -6,23 +6,8 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 
-function LoginScreen({ location, history }) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-
-    const dispatch = useDispatch()
-
-    const redirect = location.search ? location.search.split('=')[1] : '/'
-
-    const userLogin = useSelector(state => state.userLogin)
-    const { error, loading, userInfo } = userLogin
-
-    useEffect(() => {
-        if (userInfo) {
-            history.push(redirect)
-        }
-    }, [history, userInfo, redirect])
-
+function LoginScreen() {
+    
     const submitHandler = (e) => {
         e.preventDefault()
         //dispatch(login(email, password))
@@ -31,17 +16,14 @@ function LoginScreen({ location, history }) {
     return (
         <FormContainer>
             <h1>Sign In</h1>
-            {error && <Message variant='danger'>{error}</Message>}
-            {loading && <Loader />}
-            <Form onSubmit={submitHandler}>
+            <Form>
 
                 <Form.Group controlId='email'>
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
                         type='email'
                         placeholder='Enter Email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        
                     >
                     </Form.Control>
                 </Form.Group>
@@ -52,8 +34,6 @@ function LoginScreen({ location, history }) {
                     <Form.Control
                         type='password'
                         placeholder='Enter Password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
                     >
                     </Form.Control>
                 </Form.Group>
@@ -66,7 +46,7 @@ function LoginScreen({ location, history }) {
             <Row className='py-3'>
                 <Col>
                     New Customer? <Link
-                        to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+                        to='/register'>
                         Register
                         </Link>
                 </Col>

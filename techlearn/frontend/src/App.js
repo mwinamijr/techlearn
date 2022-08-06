@@ -13,7 +13,15 @@ import PrNotesList from './screens/notes/primary/PrNotesListScreen'
 
 function App() {
   return (
-    <h1>React home</h1>
+    <Router>
+      <Header />
+        <Routes path='/'>
+          <Route index element={<HomeScreen />} />
+          <Route path='login' element={<LoginScreen />} />
+          <Route path='register' element={<RegisterScreen />} />
+        </Routes>
+      <Footer />
+    </Router>
   );
 }
 
