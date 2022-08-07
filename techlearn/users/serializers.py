@@ -6,9 +6,8 @@ from .models import CustomUser
 class UserSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField(read_only=True)
     isAdmin = serializers.SerializerMethodField(read_only=True)
-    isAccountant = serializers.SerializerMethodField(read_only=True)
     isTeacher = serializers.SerializerMethodField(read_only=True)
-    isParent = serializers.SerializerMethodField(read_only=True)
+    isStudent = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = CustomUser

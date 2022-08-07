@@ -38,7 +38,9 @@ def registerUser(request):
             first_name=data['first_name'],
             last_name=data['last_name'],
             email=data['email'],
-            password=make_password(data['password'])
+            password=make_password(data['password']),
+            is_student=data['is_student'],
+            is_teacher=data['is_teacher']
         )
 
         serializer = UserSerializerWithToken(user, many=False)
