@@ -19,6 +19,7 @@ function App() {
           <Route index element={<HomeScreen />} />
           <Route path='login' element={<LoginScreen />} />
           <Route path='register' element={<RegisterScreen />} />
+          <Route path='about' element={<AboutScreen />} />
         </Routes>
       <Footer />
     </Router>

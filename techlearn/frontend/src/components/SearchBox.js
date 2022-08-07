@@ -5,7 +5,7 @@ function SearchBox() {
     const [keyword, setKeyword] = useState('')
 
     return (
-        <Form inline>
+        <Form inline="true">
             <Form.Control
                 type='text'
                 name='q'
