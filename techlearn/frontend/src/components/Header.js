@@ -5,6 +5,8 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 function Header() {
 
+    const { userInfo, loading } = useSelector((store) => store.userLogin)
+    
     const logoutHandler = () => (
         console.log("logout")
     )
