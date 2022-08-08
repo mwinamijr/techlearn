@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'frontend.apps.FrontendConfig',
     'users.apps.UsersConfig',
     'api.apps.ApiConfig',
+    'notes.apps.NotesConfig',
 ]
 
 MIDDLEWARE = [
