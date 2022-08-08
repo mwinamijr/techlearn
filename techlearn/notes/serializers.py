@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from users.models import CustomUser as User
 from .models import (Assignment, Question, Choice, GradedAssignment, Concept, 
-    Note, SpecificExplanations, Topic, SubTopic)
+    Note, AdditionalExplanation, Topic, SubTopic)
 
 
 class StringSerializer(serializers.StringRelatedField):
@@ -105,38 +105,38 @@ class SubTopicSerializer(serializers.ModelSerializer):
 
 
 class ConceptSerializer(serializers.ModelSerializer):
-    list_of_explanations = serializers.SerializerMethodField(read_only=True)
+    additional_explanations = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Concept
         fields = "__all__"
 
-    def get_list_of_explanations(self, obj):
-        list_of_explanation = obj.list_of_explanations
-        serializer = ListOfExplanationsSerializer(list_of_explanation, many=True)
+    def get_additional_explanations(self, obj):
+        additional_explanations = obj.additional_explanations
+        serializer = AdditionalExplanationsSerializer(additional_explanations, many=True)
         return serializer.data
 
 
-class ListOfExplanationsSerializer(serializers.ModelSerializer):
+class AdditionalExplanationsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SpecificExplanations
+        model = AdditionalExplanation
         fields = "__all__"
 
 
 class NoteSerializer(serializers.ModelSerializer):
-    sub_topic = serializers.SerializerMethodField(read_only=True)
-    notes = serializers.SerializerMethodField(read_only=True)
+    topic = serializers.SerializerMethodField(read_only=True)
+    concepts = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Note
         fields = "__all__"
 
-    def get_sub_topic(self, obj):
-        subtopic = obj.sub_topic
-        serializer = SubTopicSerializer(subtopic, many=False)
+    def get_topic(self, obj):
+        topic = obj.topic
+        serializer = SubTopicSerializer(topic, many=False)
         return serializer.data['name']
 
-    def get_notes(self, obj):
-        note = obj.notes
-        serializer = ConceptSerializer(note, many=True)
+    def get_concepts(self, obj):
+        concepts = obj.concepts
+        serializer = ConceptSerializer(concepts, many=True)
         return serializer.data

@@ -37,7 +37,7 @@ class GradedAssignment(models.Model):
     grade = models.FloatField()
 
     def __str__(self):
-        return self.student.username
+        return self.student.first_name
 
 
 class Choice(models.Model):
@@ -60,30 +60,40 @@ class Question(models.Model):
         return self.question
 
 
-class SpecificExplanations(models.Model):
-    sub_topic = models.ForeignKey(SubTopic, on_delete=models.CASCADE, blank=True, null=True)
+class AdditionalExplanation(models.Model):
+    """
+    This shows additional explanations for a certain concept specifically 
+    """
     name = models.CharField(max_length=255, blank=True, null=True)
     explanation = models.TextField(blank=True, null=True)
     examples = models.ManyToManyField(Question, blank=True)
 
     def __str__(self):
-        return f"{self.name} {self.sub_topic}"
+        return self.name
 
 
 class Concept(models.Model):
+    """
+    This shows a concept which is related to a certain sub-topic with its full explanation.
+    It can also have as many additional explanations which are related to that sub-topic
+    """
     sub_topic = models.ForeignKey(SubTopic, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     explanation = models.TextField(blank=True, null=True)
     image = models.ImageField(verbose_name=None, upload_to="concept images", blank=True, null=True)
-    list_of_explanations = models.ManyToManyField(SpecificExplanations, blank=True)
+    additional_explanations = models.ManyToManyField(AdditionalExplanation, blank=True)
 
     def __str__(self):
-        return f"{self.name} {self.sub_topic}"
+        return f"{self.sub_topic.topic} - {self.name}"
 
 
 class Note(models.Model):
-    sub_topic = models.ForeignKey(SubTopic, on_delete=models.CASCADE, blank=True, null=True)
-    notes = models.ManyToManyField(Concept, blank=True)
+    """
+    This contains full notes for a certain topic, it have all sub-topic concepts related to 
+    the topic.
+    """
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, blank=True, null=True)
+    concepts = models.ManyToManyField(Concept, blank=True)
 
     def __str__(self):
-        return f"{self.sub_topic}"
+        return f"{self.topic}"

@@ -66,7 +66,7 @@ class NotesListView(ListAPIView):
 
 class ConceptListView(views.APIView):
     """
-    List all concepts, or create a new student.
+    List all concepts, or create a new concept.
     """
 
     def get(self, request, format=None):

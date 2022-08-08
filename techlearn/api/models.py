@@ -17,6 +17,7 @@ class GradeLevel(models.Model):
         return self.id
 
 class ClassLevel(models.Model):
+    gradeLevel = models.ForeignKey(GradeLevel, on_delete=models.CASCADE, blank=True, null=True)
     id = models.IntegerField(unique=True, primary_key=True, verbose_name="Grade Number")
     name = models.CharField(max_length=15, blank=True, null=True, verbose_name="Class Name")
     shortname = models.CharField(max_length=15, blank=True, null=True)
