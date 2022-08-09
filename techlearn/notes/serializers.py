@@ -97,7 +97,6 @@ class TopicSerializer(serializers.ModelSerializer):
         model = Topic
         fields = "__all__"
 
-
 class SubTopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubTopic
@@ -105,12 +104,24 @@ class SubTopicSerializer(serializers.ModelSerializer):
 
 
 class ConceptSerializer(serializers.ModelSerializer):
+    topic = serializers.SerializerMethodField(read_only=True)
+    sub_topic = serializers.SerializerMethodField(read_only=True)
     additional_explanations = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Concept
         fields = "__all__"
 
+    def get_topic(self, obj):
+        topic = obj.topic
+        serializer = SubTopicSerializer(topic, many=False)
+        return serializer.data['topic']
+    
+    def get_sub_topic(self, obj):
+        sub_topic = obj.sub_topic
+        serializer = SubTopicSerializer(sub_topic, many=False)
+        return serializer.data['name']
+    
     def get_additional_explanations(self, obj):
         additional_explanations = obj.additional_explanations
         serializer = AdditionalExplanationsSerializer(additional_explanations, many=True)
@@ -122,21 +133,12 @@ class AdditionalExplanationsSerializer(serializers.ModelSerializer):
         model = AdditionalExplanation
         fields = "__all__"
 
-
 class NoteSerializer(serializers.ModelSerializer):
-    topic = serializers.SerializerMethodField(read_only=True)
-    concepts = serializers.SerializerMethodField(read_only=True)
-
+    notes = serializers.SerializerMethodField()
     class Meta:
         model = Note
         fields = "__all__"
 
-    def get_topic(self, obj):
-        topic = obj.topic
-        serializer = SubTopicSerializer(topic, many=False)
-        return serializer.data['name']
-
-    def get_concepts(self, obj):
-        concepts = obj.concepts
-        serializer = ConceptSerializer(concepts, many=True)
-        return serializer.data
+    def get_notes(self, obj):
+        notes = ConceptSerializer(obj.notes.all(), many=True).data
+        return notes

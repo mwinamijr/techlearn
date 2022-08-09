@@ -71,29 +71,28 @@ class AdditionalExplanation(models.Model):
     def __str__(self):
         return self.name
 
+class Note(models.Model):
+    """
+    This contains full notes for a certain topic, it have all sub-topic concepts related to 
+    the topic.
+    """
+    topic = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.topic}"
+
 
 class Concept(models.Model):
     """
     This shows a concept which is related to a certain sub-topic with its full explanation.
     It can also have as many additional explanations which are related to that sub-topic
     """
-    sub_topic = models.ForeignKey(SubTopic, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=255, blank=True, null=True)
+    topic = models.ForeignKey(Note, on_delete=models.SET_NULL, related_name='notes',blank=True, null=True)
+    sub_topic = models.ForeignKey(SubTopic, on_delete=models.SET_NULL, blank=True, null=True)
     explanation = models.TextField(blank=True, null=True)
     image = models.ImageField(verbose_name=None, upload_to="concept images", blank=True, null=True)
     additional_explanations = models.ManyToManyField(AdditionalExplanation, blank=True)
 
     def __str__(self):
         return f"{self.sub_topic.topic} - {self.name}"
-
-
-class Note(models.Model):
-    """
-    This contains full notes for a certain topic, it have all sub-topic concepts related to 
-    the topic.
-    """
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, blank=True, null=True)
-    concepts = models.ManyToManyField(Concept, blank=True)
-
-    def __str__(self):
-        return f"{self.topic}"
