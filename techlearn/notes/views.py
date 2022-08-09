@@ -1,3 +1,4 @@
+from urllib import response
 from django.http import Http404
 from rest_framework import viewsets, views
 from rest_framework.generics import ListAPIView, CreateAPIView
@@ -11,7 +12,7 @@ from .models import *
 from .serializers import *
 
 
-class TopicViewSet(viewsets.ModelViewSet):
+class TopicListView(ListAPIView):
     serializer_class = TopicSerializer
     queryset = Topic.objects.all()
 
@@ -59,9 +60,43 @@ class GradedAssignmentCreateView(CreateAPIView):
         return Response(status=HTTP_400_BAD_REQUEST)
 
 
-class NotesListView(ListAPIView):
-    serializer_class = NoteSerializer
-    queryset = Note.objects.all()
+class NotesListView(views.APIView):
+    def get(self, request, format=None):
+        notes = Note.objects.all()
+        serializer= NoteSerializer(notes, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = NoteSerializer(data=request.data)
+        print(request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=HTTP_201_CREATED)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+class NotesDetailView(views.APIView):
+    def get_object(self, pk):
+        try:
+            return Note.objects.get(pk=pk)
+        except Note.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        note = self.get_object(pk)
+        serializer = NoteSerializer(note)
+        print(note)
+        return Response(serializer.data)
+
+    def put(self, request, format=None):
+        note = self.get_object(pk)
+        serializer = NoteSerializer(note)
+        return response(serializer.data)
+    
+    def delete(self, request, format=None):
+        note = self.get_object(pk)
+        note.delete()
+        return Response('Note was deleted', status=HTTP_204_NO_CONTENT)
+    
 
 
 class ConceptListView(views.APIView):
