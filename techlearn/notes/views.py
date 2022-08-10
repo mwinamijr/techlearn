@@ -66,13 +66,14 @@ class NotesListView(views.APIView):
         serializer= NoteSerializer(notes, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
+    def post(self, request):
         serializer = NoteSerializer(data=request.data)
-        print(request.data)
+        #print(request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+            note = serializer.create(request)
+            if note:
+                return Response(status=HTTP_201_CREATED)
+        return Response(status=HTTP_400_BAD_REQUEST)
 
 class NotesDetailView(views.APIView):
     def get_object(self, pk):
@@ -86,17 +87,6 @@ class NotesDetailView(views.APIView):
         serializer = NoteSerializer(note)
         print(note)
         return Response(serializer.data)
-
-    def put(self, request, format=None):
-        note = self.get_object(pk)
-        serializer = NoteSerializer(note)
-        return response(serializer.data)
-    
-    def delete(self, request, format=None):
-        note = self.get_object(pk)
-        note.delete()
-        return Response('Note was deleted', status=HTTP_204_NO_CONTENT)
-    
 
 
 class ConceptListView(views.APIView):

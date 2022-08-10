@@ -11,7 +11,7 @@ class Topic(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class SubTopic(models.Model):
@@ -19,7 +19,7 @@ class SubTopic(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class Assignment(models.Model):
@@ -27,7 +27,7 @@ class Assignment(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
 
 class GradedAssignment(models.Model):
@@ -37,14 +37,14 @@ class GradedAssignment(models.Model):
     grade = models.FloatField()
 
     def __str__(self):
-        return self.student.first_name
+        return str(self.student.first_name)
 
 
 class Choice(models.Model):
     title = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
 
 class Question(models.Model):
@@ -57,7 +57,7 @@ class Question(models.Model):
     order = models.SmallIntegerField()
 
     def __str__(self):
-        return self.question
+        return str(self.question)
 
 
 class AdditionalExplanation(models.Model):
@@ -66,17 +66,17 @@ class AdditionalExplanation(models.Model):
     """
     name = models.CharField(max_length=255, blank=True, null=True)
     explanation = models.TextField(blank=True, null=True)
-    examples = models.ManyToManyField(Question, blank=True)
+    examples = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Note(models.Model):
     """
     This contains full notes for a certain topic, it have all sub-topic concepts related to 
     the topic.
     """
-    topic = models.CharField(max_length=100, blank=True, null=True)
+    topic = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return f"{self.topic}"

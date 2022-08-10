@@ -110,7 +110,7 @@ class ConceptSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Concept
-        fields = "__all__"
+        fields = ('id', 'topic', 'sub_topic', 'explanation', 'additional_explanations')
 
     def get_topic(self, obj):
         topic = obj.topic
@@ -137,8 +137,37 @@ class NoteSerializer(serializers.ModelSerializer):
     notes = serializers.SerializerMethodField()
     class Meta:
         model = Note
-        fields = "__all__"
+        fields = ("topic", "notes")
 
     def get_notes(self, obj):
         notes = ConceptSerializer(obj.notes.all(), many=True).data
         return notes
+    
+    def create(self, request):
+        data = request.data
+        note = Note()
+        note.topic = data['topic']
+        #note.save()
+
+        
+        for c in data['concepts']:
+            newConcept = Concept()
+            newConcept.name = c['name']
+            #print(c['sub_topic'])
+            topic = Note.objects.get(topic=c['topic'])
+            sub_topic = SubTopic.objects.get(name=c['sub_topic'])
+            newConcept.topic = topic
+            newConcept.sub_topic = sub_topic
+            newConcept.explanation = c['explanation']
+            newConcept.save()
+            
+
+            for ae in c['additional_explanations']:
+                newAdd = AdditionalExplanation()
+                newAdd.name = ae['name']
+                #print(ae['name'])
+                newAdd.explanation = ae['explanation']
+                newAdd.examples = ae['examples']
+                newAdd.save()
+        return note
+        
