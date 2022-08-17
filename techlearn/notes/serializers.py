@@ -127,6 +127,29 @@ class ConceptSerializer(serializers.ModelSerializer):
         serializer = AdditionalExplanationsSerializer(additional_explanations, many=True)
         return serializer.data
 
+    def create(self, request):
+        data= request.data
+        concept = Concept()
+        concept.name = data['name']
+        print(data['sub_topic'])
+        topic = Note.objects.get(topic=data['topic'])
+        sub_topic = SubTopic.objects.get(name=data['sub_topic'])
+        concept.topic = topic
+        concept.sub_topic = sub_topic
+        concept.explanation = data['explanation']
+        concept.save()
+        
+
+        for ae in data['additional_explanations']:
+            newAdd = AdditionalExplanation()
+            newAdd.name = ae['name']
+            print(ae['name'])
+            newAdd.explanation = ae['explanation']
+            newAdd.examples = ae['examples']
+            newAdd.save()
+            concept.additional_explanations.add(newAdd)
+        return concept
+
 
 class AdditionalExplanationsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -146,14 +169,11 @@ class NoteSerializer(serializers.ModelSerializer):
     def create(self, request):
         data = request.data
         note = Note()
-        note.topic = data['topic']
-        #note.save()
-
         
         for c in data['concepts']:
             newConcept = Concept()
             newConcept.name = c['name']
-            #print(c['sub_topic'])
+            print(c['sub_topic'])
             topic = Note.objects.get(topic=c['topic'])
             sub_topic = SubTopic.objects.get(name=c['sub_topic'])
             newConcept.topic = topic
@@ -169,5 +189,6 @@ class NoteSerializer(serializers.ModelSerializer):
                 newAdd.explanation = ae['explanation']
                 newAdd.examples = ae['examples']
                 newAdd.save()
+                newConcept.additional_explanations.add(newAdd)
         return note
         

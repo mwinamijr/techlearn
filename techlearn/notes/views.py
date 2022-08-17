@@ -73,7 +73,7 @@ class NotesListView(views.APIView):
             note = serializer.create(request)
             if note:
                 return Response(status=HTTP_201_CREATED)
-        return Response(status=HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 class NotesDetailView(views.APIView):
     def get_object(self, pk):
@@ -101,12 +101,12 @@ class ConceptListView(views.APIView):
 
     def post(self, request, format=None):
         serializer = ConceptSerializer(data=request.data)
-        print(request.data)
-        print(serializer.is_valid())
+        
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+            concept = serializer.create(request)
+            if concept:
+                return Response(serializer.data ,status=HTTP_201_CREATED)
+        return Response(serializer.errors ,status=HTTP_400_BAD_REQUEST)
 
 
 class ConceptDetailView(views.APIView):

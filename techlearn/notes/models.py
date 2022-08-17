@@ -64,7 +64,7 @@ class AdditionalExplanation(models.Model):
     """
     This shows additional explanations for a certain concept specifically 
     """
-    name = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=255, blank=True, null=True, unique=True)
     explanation = models.TextField(blank=True, null=True)
     examples = models.CharField(max_length=255, blank=True, null=True)
 
@@ -76,7 +76,7 @@ class Note(models.Model):
     This contains full notes for a certain topic, it have all sub-topic concepts related to 
     the topic.
     """
-    topic = models.CharField(max_length=100, null=True)
+    topic = models.CharField(max_length=100, null=True, unique=True)
 
     def __str__(self):
         return f"{self.topic}"
@@ -87,7 +87,7 @@ class Concept(models.Model):
     This shows a concept which is related to a certain sub-topic with its full explanation.
     It can also have as many additional explanations which are related to that sub-topic
     """
-    name = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=255, blank=True, null=True, unique=True)
     topic = models.ForeignKey(Note, on_delete=models.SET_NULL, related_name='notes',blank=True, null=True)
     sub_topic = models.ForeignKey(SubTopic, on_delete=models.SET_NULL, blank=True, null=True)
     explanation = models.TextField(blank=True, null=True)
