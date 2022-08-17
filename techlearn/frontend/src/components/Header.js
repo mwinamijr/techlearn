@@ -36,9 +36,8 @@ function Header() {
                                     
                         </Nav>
                         <Nav>
-
                             <LinkContainer className="float-right" to='/login'>
-                                <Nav.Link ><i className="fas fa-shopping-cart float-right"></i>Login</Nav.Link>
+                                <Nav.Link ><i className=" float-right"></i>Login</Nav.Link>
                             </LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
