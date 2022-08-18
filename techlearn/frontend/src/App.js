@@ -10,6 +10,9 @@ import AboutScreen from './screens/AboutScreen'
 import ContactScreen from './screens/ContactScreen'
 import OLNotesList from './screens/notes/secondary/OLNotesListScreen'
 import PrNotesList from './screens/notes/primary/PrNotesListScreen'
+import SubjectsListScreen from './screens/notes/secondary/SubjectsListScreen'
+import TopicListScreen from './screens/notes/secondary/TopicListScreen'
+import TopicDetailsScreen from './screens/notes/secondary/TopicDetailsScreen'
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
             </Route>
             <Route path='o-level/'>
               <Route path='' element={<OLNotesList />} />
+              <Route path='subjects/' element={<SubjectsListScreen />} />
+              <Route path='subjects/topics/' element={<TopicListScreen />} />
+              <Route path='subjects/topics/:id' element={<TopicDetailsScreen />} />
             </Route>
           </Route>
 

@@ -16,10 +16,10 @@ function NotesListScreen() {
                 <Card className="m-2">
                   <Card.Header className="text-center">Classes</Card.Header>
                     <ListGroup variant="flush">
-                      <ListGroup.Item>Form One</ListGroup.Item>
-                      <ListGroup.Item>Form Two</ListGroup.Item>
-                      <ListGroup.Item>Form Three</ListGroup.Item>
-                      <ListGroup.Item>Form Four</ListGroup.Item>
+                      <ListGroup.Item><Link className='btn' to="/notes/o-level/subjects">Form One</Link></ListGroup.Item>
+                      <ListGroup.Item><Link className='btn' to="/notes/o-level/subjects">Form Two</Link></ListGroup.Item>
+                      <ListGroup.Item><Link className='btn' to="/notes/o-level/subjects">Form Three</Link></ListGroup.Item>
+                      <ListGroup.Item><Link className='btn' to="/notes/o-level/subjects">Form Four</Link></ListGroup.Item>
                     </ListGroup>
                 </Card>
               </Col>
