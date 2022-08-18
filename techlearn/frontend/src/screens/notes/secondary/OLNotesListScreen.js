@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 function NotesListScreen() {
     return (
         <div>
+          <Link to="/" className='btn btn-light my-3'>Home</Link>
           <Card>
             <Card.Body>
                 <Card.Title className="text-center">Notes List</Card.Title>
