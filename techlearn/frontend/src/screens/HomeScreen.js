@@ -26,9 +26,9 @@ function HomeScreen() {
                   
                     <ListGroup variant="flush">
                       <ListGroup.Item>
-                        <Link to='notes/primary/notes-list'><Button variant="outline-secondary">Primary </Button>{' '}</Link>
+                        <Link to='notes/primary/'><Button variant="outline-secondary">Primary </Button>{' '}</Link>
                         </ListGroup.Item>
-                      <ListGroup.Item><Link to="/notes/sec/notes-list"><Button variant="outline-secondary">O-Level</Button>{' '}</Link></ListGroup.Item>
+                      <ListGroup.Item><Link to="/notes/o-level/"><Button variant="outline-secondary">O-Level</Button>{' '}</Link></ListGroup.Item>
                       <ListGroup.Item><Link to="/notes/sec/notes-list"><Button variant="outline-secondary">A-Level</Button>{' '}</Link></ListGroup.Item>
                     </ListGroup>
                 </Card.Body>

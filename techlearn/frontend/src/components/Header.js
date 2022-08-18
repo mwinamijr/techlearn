@@ -35,7 +35,7 @@ function Header() {
                     <Nav.Link >About</Nav.Link>
                 </LinkContainer>
                 
-                <LinkContainer to='/contact'>
+                <LinkContainer to='/contact-us'>
                     <Nav.Link>Contact Us</Nav.Link>
                 </LinkContainer>
                           
