@@ -78,7 +78,7 @@ export const logout = () => (dispatch) => {
 }
 
 
-export const register = (name, email, password) => async (dispatch) => {
+export const register = (first_name, middle_name, last_name, email, password) => async (dispatch) => {
   try {
     dispatch({
       type: USER_REGISTER_REQUEST
@@ -94,7 +94,7 @@ export const register = (name, email, password) => async (dispatch) => {
       '/users/register/',
       { 
         'first_name': first_name, 
-        'middle_name': moddle_name,
+        'middle_name': middle_name,
         'last_name': last_name, 
         'email': email, 
         'password': password,
