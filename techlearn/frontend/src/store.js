@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import {
-    userLoginReducer,
+    userLoginReducer, userRegisterReducer
 } from './redux/reducers/userReducers'
 
 import {
@@ -12,6 +12,7 @@ import {
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
+    userRegister: userRegisterReducer,
 
     notesList: notesListReducer,
 })

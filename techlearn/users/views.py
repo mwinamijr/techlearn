@@ -40,8 +40,8 @@ def registerUser(request):
             last_name=data['last_name'],
             email=data['email'],
             password=make_password(data['password']),
-            is_student=data['is_student'],
-            is_teacher=data['is_teacher']
+            is_teacher=data['is_teacher'],
+            is_student= not data['is_teacher']
         )
 
 
