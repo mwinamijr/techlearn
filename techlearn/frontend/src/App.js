@@ -13,6 +13,8 @@ import PrNotesList from './screens/notes/primary/PrNotesListScreen'
 import SubjectsListScreen from './screens/notes/secondary/SubjectsListScreen'
 import TopicListScreen from './screens/notes/secondary/TopicListScreen'
 import TopicDetailsScreen from './screens/notes/secondary/TopicDetailsScreen'
+import UserListScreen from './screens/userListScreen'
+import UserEditScreen from './screens/UsersEditScreen'
 
 function App() {
   return (
@@ -22,6 +24,10 @@ function App() {
           <Route index element={<HomeScreen />} />
           <Route path='about' element={<AboutScreen />} />
           <Route path='contact-us' element={<ContactScreen />} />
+          <Route path='admin/'>
+            <Route path='userlist' element={<UserListScreen />} />
+            <Route path='user/:id/edit' element={<UserEditScreen />} />
+          </Route>
           <Route path='notes/'>
             <Route path='primary/'>
               <Route path='' element={<PrNotesList />} />

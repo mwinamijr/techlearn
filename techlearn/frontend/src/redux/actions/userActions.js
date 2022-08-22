@@ -144,7 +144,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.get(
-            `/api/users/${id}/`,
+            `/users/${id}/`,
             config
         )
 
@@ -307,7 +307,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.put(
-            `/api/users/update/${user._id}/`,
+            `/users/update/${user.id}/`,
             user,
             config
         )

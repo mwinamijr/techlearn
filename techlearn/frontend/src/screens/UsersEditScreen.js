@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Form, Button } from 'react-bootstrap'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { InputGroup, Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
-import { getUserDetails, updateUser } from '../actions/userActions'
-import { USER_UPDATE_RESET } from '../constants/userConstants'
+import { getUserDetails, updateUser } from '../redux/actions/userActions'
+import { USER_UPDATE_RESET } from '../redux/constants/userConstants'
 
-function UserEditScreen({ match, history }) {
+function UserEditScreen() {
 
-  const userId = match.params.id
+  const { id } = useParams()
 
-  const [name, setName] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [middleName, setMiddleName] = useState('')
+  const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [isAdmin, setIsAdmin] = useState(false)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const userDetails = useSelector(state => state.userDetails)
   const { error, loading, user } = userDetails
@@ -28,28 +31,30 @@ function UserEditScreen({ match, history }) {
 
       if (successUpdate) {
           dispatch({ type: USER_UPDATE_RESET })
-          history.push('/admin/userlist')
+          navigate('/admin/userlist')
       } else {
 
-          if (!user.name || user._id !== Number(userId)) {
-              dispatch(getUserDetails(userId))
+          if (!user.email || user.id !== Number(id)) {
+              dispatch(getUserDetails(id))
           } else {
-              setName(user.name)
+              setFirstName(user.firstName)
+              setMiddleName(user.middleName)
+              setLastName(user.lastName)
               setEmail(user.email)
               setIsAdmin(user.isAdmin)
           }
       }
 
-  }, [user, userId, successUpdate, history])
+  }, [user, id, successUpdate])
 
   const submitHandler = (e) => {
       e.preventDefault()
-      dispatch(updateUser({ _id: user._id, name, email, isAdmin }))
+      dispatch(updateUser({ id: user.id, firstName, middleName, lastName, email, isAdmin }))
   }
 
   return (
     <div>
-      <Link to='/admin/userlist'>
+      <Link className='btn btn-light my-3' to='/admin/userlist'>
           Go Back
       </Link>
 
@@ -62,14 +67,25 @@ function UserEditScreen({ match, history }) {
           : (
             <Form onSubmit={submitHandler}>
 
-              <Form.Group controlId='name'>
-                <Form.Label>Name</Form.Label>
+              
+              <Form.Group controlId='firstName'>
+                <Form.Label>First Name</Form.Label>
                 <Form.Control
-
                   type='name'
-                  placeholder='Enter name'
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  placeholder='Enter First name'
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                >
+                </Form.Control>
+              </Form.Group>
+
+              <Form.Group controlId='lastName'>
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type='name'
+                  placeholder='Enter Last Name'
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                 >
                 </Form.Control>
               </Form.Group>
