@@ -101,9 +101,10 @@ def updateUser(request, pk):
     user = User.objects.get(id=pk)
 
     data = request.data
+    print(data)
 
-    user.first_name = data['first_name']
-    user.last_name = data['last_name']
+    user.first_name = data['firstName']
+    user.last_name = data['lastName']
     user.email = data['email']
     user.is_staff = data['isAdmin']
 

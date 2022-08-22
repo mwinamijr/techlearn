@@ -66,7 +66,6 @@ function UserEditScreen() {
         {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
           : (
             <Form onSubmit={submitHandler}>
-
               
               <Form.Group controlId='firstName'>
                 <Form.Label>First Name</Form.Label>
@@ -75,6 +74,17 @@ function UserEditScreen() {
                   placeholder='Enter First name'
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
+                >
+                </Form.Control>
+              </Form.Group>
+
+              <Form.Group controlId='middleName'>
+                <Form.Label>Middle Name</Form.Label>
+                <Form.Control
+                  type='name'
+                  placeholder='Enter Middle name'
+                  value={middleName}
+                  onChange={(e) => setMiddleName(e.target.value)}
                 >
                 </Form.Control>
               </Form.Group>

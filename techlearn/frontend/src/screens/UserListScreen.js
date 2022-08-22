@@ -10,7 +10,7 @@ import { listUsers, deleteUser } from '../redux/actions/userActions'
 function UserListScreen() {
 
   const dispatch = useDispatch()
-  //const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const userList = useSelector(state => state.userList)
   const { loading, error, users } = userList
@@ -67,9 +67,9 @@ function UserListScreen() {
                       <td>{user.last_name}</td>
                       <td>{user.email}</td>
                       <td>{user.isAdmin ? (
-                        <i className='bi bi-check' style={{ color: 'green' }}></i>
+                        <i className='bi bi-check' style={{ color: 'green' }}>yes</i>
                       ) : (
-                        <i className='bi bi-check' style={{ color: 'red' }}></i>
+                        <i className='bi bi-check' style={{ color: 'red' }}>No</i>
                       )}
                       </td>
 
