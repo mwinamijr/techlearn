@@ -1,7 +1,8 @@
 import {
     NOTES_LIST_REQUEST, NOTES_LIST_SUCCESS, NOTES_LIST_FAIL,
-    CONCEPT_LIST_REQUEST, CONCEPT_LIST_SUCCESS, CONCEPT_LIST_FAIL,/*  NOTES_LIST_RESET,
-    NOTES_DETAIL_START, NOTES_DETAILS_SUCCESS, NOTES_DETAILS_FAIL, NOTES_DETAILS_RESET,
+    CONCEPT_LIST_REQUEST, CONCEPT_LIST_SUCCESS, CONCEPT_LIST_FAIL,
+    CONCEPT_DETAILS_REQUEST, CONCEPT_DETAILS_SUCCESS, CONCEPT_DETAILS_FAIL, 
+    /*  NOTES_LIST_RESET, NOTES_DETAILS_RESET,
     NOTES_CREATE_REQUEST, NOTES_CREATE_SUCCESS, NOTES_CREATE_FAIL, NOTES_CREATE_RESET,
     NOTES_UPDATE_REQUEST, NOTES_UPDATE_SUCCESS, NOTES_UPDATE_FAIL, NOTES_UPDATE_RESET, 
     NOTES_DELETE_REQUEST, NOTES_DELETE_SUCCESS, NOTES_DELETE_FAIL */
@@ -39,6 +40,22 @@ export const conceptsListReducer = (state = { concepts : [] }, action) => {
       return { loading: false, concepts: action.payload }
 
     case CONCEPT_LIST_FAIL:
+      return { loading: false, error: action.payload }
+
+    default:
+      return state
+  }
+}
+
+export const conceptDetailsReducer = (state = { concept : [] }, action) => {
+  switch (action.type) {
+    case CONCEPT_DETAILS_REQUEST:
+      return { loading: true }
+
+    case CONCEPT_DETAILS_SUCCESS:
+      return { loading: false, concept: action.payload }
+
+    case CONCEPT_DETAILS_FAIL:
       return { loading: false, error: action.payload }
 
     default:

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Card, Carousel, ListGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-import { listNotes, listConcepts } from '../../../redux/actions/notesActions'
+import { listNotes, listConcepts, conceptDetails } from '../../../redux/actions/notesActions'
 
 function NotesListScreen() {
 
@@ -12,8 +12,7 @@ function NotesListScreen() {
   const { error, loading,  notes } = notesList
 
   useEffect(() => {
-    dispatch(listNotes()),
-    dispatch(listConcepts())
+    dispatch(conceptDetails())
   }, [dispatch])
   return (
     <div>

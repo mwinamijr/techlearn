@@ -8,7 +8,7 @@ import {
 } from './redux/reducers/userReducers'
 
 import {
-    notesListReducer, conceptsListReducer,
+    notesListReducer, conceptsListReducer, conceptDetailsReducer,
 } from './redux/reducers/notesReducers'
 
 const reducer = combineReducers({
@@ -21,6 +21,7 @@ const reducer = combineReducers({
 
     notesList: notesListReducer,
     conceptsList: conceptsListReducer,
+    conceptDetails: conceptDetailsReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
