@@ -30,7 +30,6 @@ const notesListFromStorage = localStorage.getItem('notesLst') ?
 
 const initialState = {
     userLogin: { userInfo: userInfoFromStorage },
-    notesList: { notes: notesListFromStorage },
 }
 
 const middleware = [thunk]

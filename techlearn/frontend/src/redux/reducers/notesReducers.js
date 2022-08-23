@@ -9,7 +9,6 @@ import {
 
 const initialState = {
   notes: [],
-  currentNotes: {},
   error: null,
   loading: false
 };

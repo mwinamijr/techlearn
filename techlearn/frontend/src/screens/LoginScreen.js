@@ -9,17 +9,17 @@ import FormContainer from '../components/FormContainer'
 import { login } from '../redux/actions/userActions'
 
 function LoginScreen() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-    const dispatch = useDispatch()
-    const userLogin = useSelector(store => store.userLogin)
-    const { error, loading,  userInfo } = userLogin
+  const dispatch = useDispatch()
+  const userLogin = useSelector(store => store.userLogin)
+  const { error, loading,  userInfo } = userLogin
 
-    useEffect(() => {
-        if (userInfo) {
-        }
-    }, [userInfo])
+  useEffect(() => {
+      if (userInfo) {
+      }
+  }, [userInfo])
     
   const submitHandler = (e) => {
     e.preventDefault()

@@ -18,7 +18,7 @@ export const listNotes = () => async (dispatch) => {
           type: NOTES_LIST_SUCCESS,
           payload: data
       })
-      localStorage.setItem('notesLst', JSON.stringify(data))
+      //localStorage.setItem('notesLst', JSON.stringify(data))
 
   } catch (error) {
       dispatch({
