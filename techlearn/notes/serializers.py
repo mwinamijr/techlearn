@@ -160,7 +160,7 @@ class NoteSerializer(serializers.ModelSerializer):
     notes = serializers.SerializerMethodField()
     class Meta:
         model = Note
-        fields = ("topic", "notes")
+        fields = ("id", "topic", "notes")
 
     def get_notes(self, obj):
         notes = ConceptSerializer(obj.notes.all(), many=True).data

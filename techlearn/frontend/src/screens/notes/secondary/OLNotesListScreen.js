@@ -12,7 +12,7 @@ function NotesListScreen() {
   const { error, loading,  notes } = notesList
 
   useEffect(() => {
-    dispatch(conceptDetails())
+    dispatch(listConcepts())
   }, [dispatch])
   return (
     <div>
