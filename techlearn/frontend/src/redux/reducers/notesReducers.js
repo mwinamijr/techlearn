@@ -1,5 +1,6 @@
 import {
     NOTES_LIST_REQUEST, NOTES_LIST_SUCCESS, NOTES_LIST_FAIL,
+    NOTE_DETAILS_REQUEST, NOTE_DETAILS_SUCCESS, NOTE_DETAILS_FAIL,
     CONCEPT_LIST_REQUEST, CONCEPT_LIST_SUCCESS, CONCEPT_LIST_FAIL,
     CONCEPT_DETAILS_REQUEST, CONCEPT_DETAILS_SUCCESS, CONCEPT_DETAILS_FAIL, 
     /*  NOTES_LIST_RESET, NOTES_DETAILS_RESET,
@@ -24,6 +25,22 @@ export const notesListReducer = (state = { notes : [] }, action) => {
       return { loading: false, notes: action.payload }
 
     case NOTES_LIST_FAIL:
+      return { loading: false, error: action.payload }
+
+    default:
+      return state
+  }
+}
+
+export const noteDetailsReducer = (state = { note : [] }, action) => {
+  switch (action.type) {
+    case NOTE_DETAILS_REQUEST:
+      return { loading: true }
+
+    case NOTE_DETAILS_SUCCESS:
+      return { loading: false, note: action.payload }
+
+    case NOTE_DETAILS_FAIL:
       return { loading: false, error: action.payload }
 
     default:

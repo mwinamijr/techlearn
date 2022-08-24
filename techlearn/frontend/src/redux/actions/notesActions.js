@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
     NOTES_LIST_REQUEST, NOTES_LIST_SUCCESS, NOTES_LIST_FAIL,
+    NOTE_DETAILS_REQUEST, NOTE_DETAILS_SUCCESS, NOTE_DETAILS_FAIL,
     CONCEPT_LIST_REQUEST, CONCEPT_LIST_SUCCESS, CONCEPT_LIST_FAIL, 
     CONCEPT_DETAILS_REQUEST, CONCEPT_DETAILS_SUCCESS, CONCEPT_DETAILS_FAIL, 
     /*NOTES_LIST_RESET, NOTES_DETAILS_RESET,
@@ -31,6 +32,26 @@ export const listNotes = () => async (dispatch) => {
       })
   }
 }
+
+export const getNoteDetails = (id) => async (dispatch) => {
+    try {
+        dispatch({type: NOTE_DETAILS_REQUEST})
+
+        const { data } = await axios.get(`http://127.0.0.1:8000/notes/${id}/`)
+
+        dispatch({
+            type: NOTE_DETAILS_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: NOTE_DETAILS_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+  }
 
 export const listConcepts = () => async (dispatch) => {
     try {

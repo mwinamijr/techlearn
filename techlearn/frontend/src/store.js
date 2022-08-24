@@ -8,7 +8,7 @@ import {
 } from './redux/reducers/userReducers'
 
 import {
-    notesListReducer, conceptsListReducer, conceptDetailsReducer,
+    notesListReducer, noteDetailsReducer, conceptsListReducer, conceptDetailsReducer,
 } from './redux/reducers/notesReducers'
 
 const reducer = combineReducers({
@@ -20,6 +20,7 @@ const reducer = combineReducers({
     userUpdate: userUpdateReducer,
 
     notesList: notesListReducer,
+    noteDetails: noteDetailsReducer,
     conceptsList: conceptsListReducer,
     conceptDetails: conceptDetailsReducer,
 })
